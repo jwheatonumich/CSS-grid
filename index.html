@@ -6,6 +6,11 @@
     .d4{background:LightPink;}
     .d5{background:PaleGreen;}
 
+    .d1-header{
+        background:LightSkyBlue;
+        grid-area: header;
+        }
+
     .d3-align{
         background:Grey;
         align-self: center;
@@ -22,10 +27,16 @@
         grid-row: 3 / 4;
     }
 
+    .d5-grid-area{
+        background:PaleGreen;
+        grid-area: 3/2/4/4;
+    }
+
     .container{
         display:grid;
         grid-template-columns: 50px 50px 50px;
-        grid-template-rows: 50px 50px 50px;
+        /*Using repeat is the same as typing it out, but easier if you need a lot of the same row*/
+        grid-template-rows: repeat(3, 50px);
     }
 
     .container-col-size{
@@ -39,6 +50,104 @@
         grid-template-columns: 50px 50px 50px;
         grid-template-rows: 50px 50px 50px;
     }
+
+    .container-justify{
+        display:grid;
+        grid-gap: 5px 5px;
+        grid-template-columns: 50px 50px 50px;
+        grid-template-rows: 50px 50px 50px;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .container-grid-area {
+    height: 150px;
+    width: 150px;
+    grid-gap: 5px 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      "header header header"
+      "advert content content"
+      "footer footer footer";
+  }
+
+  .container-autofill{
+      min-height: 250px;
+      width: 100%;
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-rows: repeat(3, 50px);
+      grid-gap: 5px;
+  }
+
+  .container-autofit{
+      min-height: 250px;
+      width: 100%;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-rows: repeat(3, 50px);
+      grid-gap: 5px;
+    }
+
+    .container-resize {
+    font-size: 1.5em;
+    min-height: 300px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px auto 1fr auto;
+    grid-gap: 10px;
+    grid-template-areas:
+      "header"
+      "advert"
+      "content"
+      "footer";
+  }
+
+  @media (min-width: 600px){
+    .container-resize{
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "advert header"
+        "advert content"
+        "advert footer";
+    }
+  }
+
+  @media (min-width: 800px){
+    .container-resize{
+      grid-template-areas:
+      /* Only change code below this line */
+        "header header"
+        "advert content"
+        "footer footer";
+      /* Only change code above this line */
+    }
+  }
+
+    .item1 {
+        background: LightSkyBlue;
+        grid-area: header;
+    }
+
+  .item2 {
+    background: LightSalmon;
+    grid-area: advert;
+  }
+
+  .item3 {
+    background: PaleTurquoise;
+    grid-area: content;
+  }
+
+  .item4 {
+    background: lightpink;
+    grid-area: footer;
+  }
+
 
 </style>
 
@@ -94,4 +203,48 @@
         <div class="d5-grid-column">5</div>
     </div>
 
+    <p>
+        This container centers all of the content using justify-items and align-items.
+    </p>
+    <div class="container-justify">
+        <div class="d1">1</div>
+        <div class="d2">2</div>
+        <div class="d3">3</div>
+        <div class="d4">4</div>
+        <div class="d5">5</div>
+    </div>
+
+    <p>
+        This container names the top row of grids and the blue object is assigned to that grid-area. <br>
+        The green area is positions be assigning a grid-area in the object rather than the container.
+    </p>
+    <div class="container-grid-area">
+        <div class="d1-header">1</div>
+        <div class="d2">2</div>
+        <div class="d3">3</div>
+        <div class="d4">4</div>
+        <div class="d5-grid-area">5</div>
+      </div>
+
+    <p>This container uses column autofill to automatically create columns to fit the rectangles on the page.</p>
+    <div class="container-autofill">
+        <div class="d1">1</div>
+        <div class="d2">2</div>
+        <div class="d3">3</div>
+    </div>
+
+    <p>This container uses autofit, so it will also create columns, but will also stretch the shapes to fill all available space.</p>
+    <div class="container-autofit">
+        <div class="d1">1</div>
+        <div class="d2">2</div>
+        <div class="d3">3</div>
+    </div>
+
+    <P>This divider will reposition its contents based on the width of the viewport.</P>
+    <div class="container-resize">
+        <div class="item1">Section 1</div>
+        <div class="item2">Section 2</div>
+        <div class="item3">Section 3</div>
+        <div class="item4">Section 4</div>
+    </div>
 </body>
